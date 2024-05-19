@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Vue 3 Basics</title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			{{greetMe}}
+
+			<input type="text" @keyup.enter="greet" v-model="greetMe" />
+			<!-- the v-model takes on the values of the variable in the data -->
+
+			<hr />
+
+			<div v-if="isVisible" style="width: 10px; height: 10px; background: #000">
+				<!-- use v-if when you want conditional rendering  -->
+			</div>
+
+			<hr />
+
+			<div
+				v-else-if="isVisible2"
+				style="width: 10px; height: 10px; background: #f4f440"
+			></div>
+
+			<hr />
+
+			<div
+				v-else="isVisible2"
+				style="width: 10px; height: 10px; background: #e1f1f0"
+			></div>
+
+			<!-- the above just follows an if else loop -->
+
+			<hr />
+			<hr />
+			<hr />
+
+			<div
+				v-show="isVisible"
+				style="width: 10px; height: 10px; background: #c4c3cc"
+			>
+				<!-- use v-show when you want just optional display --- it might be more performant than v-if -->
+			</div>
+
+			<button v-on:click="isVisible = !isVisible">Toggle</button>
+
+			<!-- OR -->
+
+			<button @click="isVisible = !isVisible">Toggle</button>
+
+			<!-- OR -->
+
+			<button @click="toggleBox">Toggle</button>
+
+			<div v-if="isVisible">Hello</div>
+		</div>
+
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+		<script>
+			let app = Vue.createApp({
+				data: function () {
+					return {
+						greetMe: "Hi JOLOO",
+						isVisible: false,
+						isVisible2: true,
+					};
+				},
+            methods: {
+               toggleBox(){
+                  this.isVisible = !this.isVisible
+               },
+               greet() {
+                  console.log(this.greetMe)
+               }
+            },
+			});
+			app.mount("#app");
+		</script>
+	</body>
+</html>
